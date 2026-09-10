@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project("logger")
+project("example")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -13,8 +13,11 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-add_library(logger STATIC
-  src/logger.cpp
+add_subdirectory(.. ${CMAKE_BINARY_DIR}/logger)
+
+add_executable(exec
+  example.cpp
 )
 
-target_include_directories(logger PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(exec PRIVATE logger)
+
